@@ -1,9 +1,9 @@
 #!"c:\Users\Kevin Shi\Documents\projects\dash-analytics\web\dash\flask\Scripts\python.exe"
-# EASY-INSTALL-ENTRY-SCRIPT: 'setuptools==0.6c11','console_scripts','easy_install-2.7'
-__requires__ = 'setuptools==0.6c11'
+# EASY-INSTALL-ENTRY-SCRIPT: 'setuptools==5.7','console_scripts','easy_install-2.7'
+__requires__ = 'setuptools==5.7'
 import sys
 from pkg_resources import load_entry_point
 
 sys.exit(
-   load_entry_point('setuptools==0.6c11', 'console_scripts', 'easy_install-2.7')()
+   load_entry_point('setuptools==5.7', 'console_scripts', 'easy_install-2.7')()
 )
