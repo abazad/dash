@@ -1,0 +1,37 @@
+import re
+
+# read from uploaded text file
+
+chat_history = open('uploads/upload.txt', 'r')
+
+chat = {}
+
+# define message object with two attributes
+
+# message.time = timestamp
+# message.data = data
+
+# convo = [{sender: [message, message... ]}, {sender: [message, message... ]]}
+
+# read file line by line and save to array accordingly
+
+for line in chat_history:
+	string = line
+	line = re.split(r'\t+', string)
+	date = line[0]
+	time = line[1]
+	timestamp = date + time
+	participant = line[4]
+	direction = line[2]
+	if direction == 'in':
+		sender = participant
+	else:
+		sender = 'You'
+	data = line[5]
+	if chat.has_key(sender):
+		message = [timestamp, data]
+		chat[sender].append(message)
+	else:
+		chat[sender] = []
+		message = [timestamp, data]
+		chat[sender].append(message)

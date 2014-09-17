@@ -33,3 +33,11 @@ A personal analytics dashboard.
 * flask\Scripts\pip install pytz==2013b
 * flask\Scripts\pip install flask-babel==0.8
 * flask\Scripts\pip install flup
+
+### Extracting WhatsApp Key File
+Karina's computer does not have openssl zlib. Therefore, substitute with python.
+
+dd if=whatsapp.ab ibs=24 skip=1 | python -c "import zlib,sys;sys.stdout.write(zlib.decompress(sys.stdin.read()))" > whatsapp.tar
+
+The entire instruction set can be found here:
+http://www.digitalinternals.com/security/decrypt-whatsapp-crypt7-database-messages/307/
