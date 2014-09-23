@@ -1,6 +1,7 @@
 #!flask/bin/python
-from app import app, parser
-from flask import request, flash, redirect, url_for, render_template, send_from_directory
+from app import app
+from parser import parse
+from flask import request, flash, redirect, url_for, render_template, send_from_directory, Response, json
 from werkzeug import secure_filename
 import os
 
@@ -11,7 +12,6 @@ allowed_extensions = set(['txt'])
 
 import re, os
 chat = {}
-chat_history = open('app/uploads/upload.txt', 'r')
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -30,30 +30,9 @@ def upload_file():
             print os.path
             file.save(os.path.join(app.config['upload_folder'], new_filename))
             flash ('Got it.')
-            return redirect(url_for('parse'))
+            return redirect(url_for('display_parse'))
     return render_template('index.html')
 
 @app.route('/parsed')
-def parse():
-    for line in chat_history:
-        string = line
-        line = re.split(r'\t+', string)
-        date = line[0]
-        time = line[1]
-        timestamp = date + time
-        participant = line[4]
-        direction = line[2]
-        if direction == 'in':
-            sender = participant
-        else:
-            sender = 'You'
-            data = line[5]
-        if chat.has_key(sender):
-            message = [timestamp, data]
-            chat[sender].append(message)
-        else:
-            chat[sender] = []
-            message = [timestamp, data]
-            chat[sender].append(message)
-    print chat
-    return render_template('parsed.html')
+def display_parse():
+    return Response(json.dumps(parse()), mimetype='application/json')
