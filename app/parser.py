@@ -1,10 +1,12 @@
-import re
-
-# read from uploaded text file
-
-chat_history = open('uploads/upload.txt', 'r')
+import re, os
 
 chat = {}
+
+# use this path when it is hooked up with the app
+chat_history = open('app/uploads/upload.txt', 'r')
+
+# use this path when running parser.py alone
+# chat_history = open('uploads/upload.txt', 'r')
 
 # define message object with two attributes
 
@@ -15,23 +17,25 @@ chat = {}
 
 # read file line by line and save to array accordingly
 
-for line in chat_history:
-	string = line
-	line = re.split(r'\t+', string)
-	date = line[0]
-	time = line[1]
-	timestamp = date + time
-	participant = line[4]
-	direction = line[2]
-	if direction == 'in':
-		sender = participant
-	else:
-		sender = 'You'
-	data = line[5]
-	if chat.has_key(sender):
-		message = [timestamp, data]
-		chat[sender].append(message)
-	else:
-		chat[sender] = []
-		message = [timestamp, data]
-		chat[sender].append(message)
+def parse():
+	for line in chat_history:
+		string = line
+		line = re.split(r'\t+', string)
+		date = line[0]
+		time = line[1]
+		timestamp = date + time
+		participant = line[4]
+		direction = line[2]
+		if direction == 'in':
+			sender = participant
+		else:
+			sender = 'You'
+			data = line[5]
+		if chat.has_key(sender):
+			message = [timestamp, data]
+			chat[sender].append(message)
+		else:
+			chat[sender] = []
+			message = [timestamp, data]
+			chat[sender].append(message)
+	print chat

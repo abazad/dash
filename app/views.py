@@ -1,20 +1,25 @@
-import os
-from flask import Flask, request, redirect, url_for, render_template, send_from_directory
+#!flask/bin/python
+from app import app, parser
+from flask import request, flash, redirect, url_for, render_template, send_from_directory
 from werkzeug import secure_filename
-from app import app
+import os
 
-UPLOAD_FOLDER = 'uploads/'
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+upload_folder = 'app/uploads/'
+app.config['upload_folder'] = upload_folder
+new_filename = 'upload.txt'
+allowed_extensions = set(['txt'])
 
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+import re, os
+chat = {}
+chat_history = open('app/uploads/upload.txt', 'r')
 
 def allowed_file(filename):
     return '.' in filename and \
-           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+           filename.rsplit('.', 1)[1] in allowed_extensions
 
 @app.route('/uploads')
 def hello():
-    return app.config['UPLOAD_FOLDER']
+    return app.config['upload_folder']
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
@@ -22,22 +27,33 @@ def upload_file():
         file = request.files['file']
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], file))
-            return redirect(url_for('uploaded-file',
-                                    filename=filename))
-    return '''
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form action="" method=post enctype=multipart/form-data>
-      <p><input type=file name=file>
-         <input type=submit value=Upload>
-    </form>
-    '''
-    # def index():
-    #     return render_template('index.html')
+            print os.path
+            file.save(os.path.join(app.config['upload_folder'], new_filename))
+            flash ('Got it.')
+            return redirect(url_for('parse'))
+    return render_template('index.html')
 
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'],
-                               filename)
+@app.route('/parsed')
+def parse():
+    for line in chat_history:
+        string = line
+        line = re.split(r'\t+', string)
+        date = line[0]
+        time = line[1]
+        timestamp = date + time
+        participant = line[4]
+        direction = line[2]
+        if direction == 'in':
+            sender = participant
+        else:
+            sender = 'You'
+            data = line[5]
+        if chat.has_key(sender):
+            message = [timestamp, data]
+            chat[sender].append(message)
+        else:
+            chat[sender] = []
+            message = [timestamp, data]
+            chat[sender].append(message)
+    print chat
+    return render_template('parsed.html')

@@ -1,7 +1,4 @@
-import os
-from flask import Flask, request, redirect, url_for
-from werkzeug import secure_filename
-
+from flask import Flask
 app = Flask(__name__)
-
-# from app import views
+app.secret_key = 'kevmo'
+from app import views
