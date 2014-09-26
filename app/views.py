@@ -35,4 +35,5 @@ def upload_file():
 
 @app.route('/parsed')
 def display_parse():
-    return Response(json.dumps(parse()), mimetype='application/json')
+    print parse()
+    return 'Thanks for letting us creep your conversations.'

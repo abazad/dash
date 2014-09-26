@@ -24,14 +24,15 @@ def parse():
 		line = re.split(r'\t+', string)
 		date = line[0]
 		time = line[1]
-		timestamp = date + time
+		timestamp = date + " " + time
 		participant = line[4]
 		direction = line[2]
 		if direction == 'in':
 			sender = participant
 		else:
 			sender = 'You'
-			data = line[5]
+		data = line[5]
+		data = data[:-2]
 		if chat.has_key(sender):
 			message = [timestamp, data]
 			chat[sender].append(message)
