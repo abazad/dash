@@ -1,9 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>dash</title>
+    <script>
+    </script>
+    <link href="../static/css/foundation.css" rel="stylesheet">
+    <title>dash</title>
 </head>
 <body>
-<p>Thanks for letting us creep your conversations.</p>
+<p>Rendering graphs</p>
+<canvas id="myChart" width="400" height="400"></canvas>
 </body>
+<script src="../static/js/chart.min.js"></script>
+<script src="../static/js/jquery-1.11.1.js"></script>
+<script src="../static/js/display.js"></script>
+<script type="text/javascript">
+    var users = {{ users|safe }}
+    console.log(users);
+    displayGraph(users);
+</script>
 </html>
