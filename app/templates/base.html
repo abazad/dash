@@ -22,9 +22,7 @@
 <script src="../static/js/chart.min.js"></script>
 <script src="../static/js/jquery-1.11.1.js"></script>
 <script src="../static/js/display.js"></script>
-<script type="text/javascript">
-    var users = {{ users|safe }}
-    console.log(users);
-    displayGraph(users);
-</script>
+<script src="../static/js/chart-defaults.js"></script>
+{% block end %}
+{% endblock %}
 </html>

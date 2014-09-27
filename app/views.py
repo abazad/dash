@@ -33,7 +33,9 @@ def upload_file():
 @app.route('/dashboard')
 def display_dashboard():
     chat = parse()
-    users = []
+    messages = {}
     for key in chat:
-        users.append(key)
-    return render_template('dashboard.html', users=users)
+        number = len(chat[key]);
+        messages[key] = number;
+    print messages
+    return render_template('dashboard.html', messages=messages)
