@@ -27,14 +27,13 @@ def upload_file():
             print os.path
             file.save(os.path.join(app.config['upload_folder'], new_filename))
             flash ('Got it.')
-            return redirect(url_for('display_parse'))
-    return render_template('index.html')
+            return redirect(url_for('display_dashboard'))
+    return render_template('upload.html')
 
-@app.route('/parsed')
-def display_parse():
+@app.route('/dashboard')
+def display_dashboard():
     chat = parse()
     users = []
     for key in chat:
         users.append(key)
-    print users
-    return render_template('parsed.html', users=users)
+    return render_template('dashboard.html', users=users)

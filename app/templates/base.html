@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <script>
-    </script>
+	{% block head %}
+	<title>dash</title>
+	<link rel="icon" href="../static/images/flippy.png">
     <link href="../static/css/foundation.css" rel="stylesheet">
-    <title>dash</title>
+    {% endblock %}
 </head>
+
 <body>
-<p>Rendering graphs</p>
-<canvas id="myChart" width="400" height="400"></canvas>
+{% block content %}
+{% endblock %}
 </body>
+
 <script src="../static/js/chart.min.js"></script>
 <script src="../static/js/jquery-1.11.1.js"></script>
 <script src="../static/js/display.js"></script>
