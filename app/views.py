@@ -10,7 +10,6 @@ app.config['upload_folder'] = upload_folder
 new_filename = 'upload.txt'
 allowed_extensions = set(['txt'])
 
-import re, os
 chat = {}
 
 def allowed_file(filename):
@@ -35,5 +34,9 @@ def upload_file():
 
 @app.route('/parsed')
 def display_parse():
-    print parse()
-    return 'Thanks for letting us creep your conversations.'
+    chat = parse()
+    users = []
+    for key in chat:
+        users.append(key)
+    print users
+    return render_template('parsed.html', users=users)
