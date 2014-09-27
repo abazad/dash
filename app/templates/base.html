@@ -6,12 +6,17 @@
 	<title>dash</title>
 	<link rel="icon" href="../static/images/flippy.png">
     <link href="../static/css/foundation.css" rel="stylesheet">
+    <link href="../static/css/layout.css" rel="stylesheet">
     {% endblock %}
 </head>
 
 <body>
-{% block content %}
-{% endblock %}
+	<div class="row">
+ 	<div class="small-12 large-centered column">
+		{% block content %}
+		{% endblock %}
+	</div>
+	</div>
 </body>
 
 <script src="../static/js/chart.min.js"></script>
