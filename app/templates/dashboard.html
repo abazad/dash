@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<canvas id="myChart" width="400" height="400"></canvas>
+
+{% endblock %}
+
+{% block end %}
+
+<script type="text/javascript">
+    var messages = {{ messages|safe }}
+    console.log(messages);
+    displayGraph(messages);
+</script>
+
+{% endblock %}
