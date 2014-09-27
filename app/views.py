@@ -33,8 +33,9 @@ def upload_file():
 @app.route('/parsed')
 def display_parse():
     chat = parse()
-    users = []
+    messages = {}
     for key in chat:
-        users.append(key)
-    print users
-    return render_template('parsed.html', users=users)
+        number = len(chat[key]);
+        messages[key] = number;
+    print messages
+    return render_template('parsed.html', messages=messages)
