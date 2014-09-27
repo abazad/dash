@@ -1,7 +1,7 @@
 function displayGraph(users) {
     $(function () {
         var data = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            labels: users,
             datasets: [
                 {
                     label: "My First dataset",

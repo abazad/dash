@@ -1,7 +1,5 @@
 import re, os
 
-chat = {}
-
 # use this path when it is hooked up with the app
 # chat_history = open('app/uploads/upload.txt', 'r')
 
@@ -18,26 +16,27 @@ chat = {}
 # read file line by line and save to array accordingly
 
 def parse():
-	chat_history = open('app/uploads/upload.txt', 'r')
-	for line in chat_history:
-		string = line
-		line = re.split(r'\t+', string)
-		date = line[0]
-		time = line[1]
-		timestamp = date + " " + time
-		participant = line[4]
-		direction = line[2]
-		if direction == 'in':
-			sender = participant
-		else:
-			sender = 'You'
-		data = line[5]
-		data = data[:-2]
-		if chat.has_key(sender):
-			message = [timestamp, data]
-			chat[sender].append(message)
-		else:
-			chat[sender] = []
-			message = [timestamp, data]
-			chat[sender].append(message)
-	return chat
+    chat = {}
+    chat_history = open('app/uploads/upload.txt', 'r')
+    for line in chat_history:
+        string = line
+        line = re.split(r'\t+', string)
+        date = line[0]
+        time = line[1]
+        timestamp = date + " " + time
+        participant = line[4]
+        direction = line[2]
+        if direction == 'in':
+            sender = participant
+        else:
+            sender = 'You'
+        data = line[5]
+        data = data[:-2]
+        if chat.has_key(sender):
+            message = [timestamp, data]
+            chat[sender].append(message)
+        else:
+            chat[sender] = []
+            message = [timestamp, data]
+            chat[sender].append(message)
+    return chat

@@ -10,8 +10,6 @@ app.config['upload_folder'] = upload_folder
 new_filename = 'upload.txt'
 allowed_extensions = set(['txt'])
 
-chat = {}
-
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in allowed_extensions
