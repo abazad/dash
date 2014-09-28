@@ -14,10 +14,10 @@
 
 <div class="row">
   <div class="small-4 column">
-  	<canvas id="myChart" width="250" height="250"></canvas>
+  	<canvas id="doughnut" width="250" height="250"></canvas>
   </div>
   <div class="small-4 column">
-  	<p>chart two.</p>
+  	<canvas id="linegraph" width="400" height="400"></canvas>
   </div>
   <div class="small-4 column">
   	<p>chart three.</p>
@@ -29,9 +29,10 @@
 {% block end %}
 
 <script type="text/javascript">
-  var messages = {{ messages|safe }}
-  console.log(messages);
-  displayGraph(messages);
+    var messages = {{ messages|safe }}
+    var dateGraph = {{ dateGraph|safe }}
+    displayDoughnutGraph(messages);
+    displayLineGraph(dateGraph);
 </script>
 
 {% endblock %}
