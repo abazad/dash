@@ -11,16 +11,17 @@
 </nav>
 <br>
 
-<canvas id="myChart" width="400" height="400"></canvas>
-
+<canvas id="doughnut" width="400" height="400"></canvas>
+<canvas id="linegraph" width="400" height="400"></canvas>
 {% endblock %}
 
 {% block end %}
 
 <script type="text/javascript">
     var messages = {{ messages|safe }}
-    console.log(messages);
-    displayGraph(messages);
+    var dateGraph = {{ dateGraph|safe }}
+    displayDoughnutGraph(messages);
+    displayLineGraph(dateGraph);
 </script>
 
 {% endblock %}

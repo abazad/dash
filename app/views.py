@@ -34,8 +34,23 @@ def upload_file():
 def display_dashboard():
     chat = parse()
     messages = {}
+    byDates = {}
     for key in chat:
-        number = len(chat[key]);
-        messages[key] = number;
+        number = len(chat[key])
+        messages[key] = number
+        # construct messages per month by year and month
+        for i in range(0, len(chat[key])):
+            yearMonth = chat[key][i][0].split(" ")[0][:7]
+            if yearMonth in byDates:
+                if key in byDates[yearMonth]:
+                    byDates[yearMonth][key]+=1
+                else:
+                    byDates[yearMonth][key]={}
+                    byDates[yearMonth][key]=1
+            else:
+                byDates[yearMonth]={}
+                byDates[yearMonth][key]={}
+                byDates[yearMonth][key]=1
+
     print messages
-    return render_template('dashboard.html', messages=messages)
+    return render_template('dashboard.html', messages=messages, dateGraph=byDates)
