@@ -26,8 +26,10 @@ def upload_file():
             filename = secure_filename(file.filename)
             print os.path
             file.save(os.path.join(app.config['upload_folder'], new_filename))
-            flash ('Got it.')
             return redirect(url_for('display_dashboard'))
+        else:
+            flash ('Please upload a .txt file.')
+            return redirect('/')
     return render_template('upload.html')
 
 @app.route('/dashboard')
@@ -37,5 +39,4 @@ def display_dashboard():
     for key in chat:
         number = len(chat[key]);
         messages[key] = number;
-    print messages
     return render_template('dashboard.html', messages=messages)

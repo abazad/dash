@@ -4,7 +4,13 @@
 <h1>dash</h1>
 
 <form action="" method="post" enctype="multipart/form-data">
-    <input type="file" name="file">
+    <input type="file" name="file" style="">
+    {% for message in get_flashed_messages() %}
+        <div data-alert class="alert-box alert">
+  		{{ message }}
+  		<a href="#" class="close">&times;</a>
+		</div>
+	{% endfor %}
     <input type="submit" value="Upload" class = "button tiny"></p>
 </form>
 

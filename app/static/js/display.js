@@ -1,5 +1,5 @@
 function displayGraph(messages) {
-    $(function () {
+    $(function() {
         var users = new Array();
         var data = [];
         var colors = [];
@@ -18,11 +18,13 @@ function displayGraph(messages) {
             data.push(dataset);
         }
 
-// Get context with jQuery - using jQuery's .get() method.
-        var ctx = $('#myChart').get(0).getContext("2d");
-// This will get the first returned node in the jQuery collection.
-        var myNewChart = new Chart(ctx);
+        options = {
+            segmentShowStroke : true
+        }
 
-        var myLineChart = new Chart(ctx).Doughnut(data);
+        var ctx = $('#myChart').get(0).getContext("2d");
+        var myLineChart = new Chart(ctx).Doughnut(data, options);
+        var legend = myLineChart.generateLegend();
+        $('#myChart').append(legend);
     })
 }
